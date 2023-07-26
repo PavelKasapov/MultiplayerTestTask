@@ -464,10 +464,12 @@ GameObject:
   m_Component:
   - component: {fileID: 402983124448067588}
   - component: {fileID: 6628759016196715330}
-  - component: {fileID: 1845817063132014150}
   - component: {fileID: 568418849610212646}
   - component: {fileID: 3891223733116938419}
-  m_Layer: 0
+  - component: {fileID: 1845817063132014150}
+  - component: {fileID: 9023510975134676745}
+  - component: {fileID: 107695700510948040}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,21 +546,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1845817063132014150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8704376535399296493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138f318100caa45409ca0f36ffd12934, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 568418849610212646}
-  bulletManager: {fileID: 0}
-  gunTransform: {fileID: 376787607023711629}
 --- !u!50 &568418849610212646
 Rigidbody2D:
   serializedVersion: 4
@@ -596,3 +583,45 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1845817063132014150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704376535399296493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138f318100caa45409ca0f36ffd12934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 568418849610212646}
+  bulletManager: {fileID: 0}
+  gunTransform: {fileID: 376787607023711629}
+--- !u!114 &9023510975134676745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704376535399296493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11855319c5b99f54d90849362e23aac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsCollected: 0
+--- !u!114 &107695700510948040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704376535399296493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ed7619f32db5f40a1bdbc075124d21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 100
+  spriteRenderer: {fileID: 6628759016196715330}

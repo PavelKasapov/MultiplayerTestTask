@@ -11,12 +11,13 @@ public class BulletManager : MonoBehaviour
     private List<Bullet> bulletPool = new List<Bullet>();
     private List<Bullet> activeBullets = new List<Bullet>();
 
-    public void Shoot(Vector2 fromPosition, Vector2 direction)
+    public void Shoot(Vector2 fromPosition, Quaternion rotation)
     {
         Bullet bullet;
         if (bulletPool.Count == 0)
         {
             bullet = Instantiate(bulletPrefab, transform).GetComponent<Bullet>();
+            bullet.OnCollideAction = () => ReturnToPool(bullet);
         }
         else
         {
@@ -24,8 +25,7 @@ public class BulletManager : MonoBehaviour
             bulletPool.Remove(bullet);
         }
         activeBullets.Add(bullet);
-        bullet.Shoot(fromPosition, direction, () => ReturnToPool(bullet));
-        Debug.Log($"{fromPosition} {direction} {bullet}");
+        bullet.Shoot(fromPosition, rotation);
     }
 
     private void ReturnToPool(Bullet bullet)

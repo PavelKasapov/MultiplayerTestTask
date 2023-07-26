@@ -13,7 +13,6 @@ public class PlayerMovementSystem : MonoBehaviour
 
     private Coroutine moveCoroutine;
     private Vector2 moveDirection;
-    private Vector2 lookDirection;
     private Transform selfTransform;
 
     private void Awake()
@@ -23,18 +22,12 @@ public class PlayerMovementSystem : MonoBehaviour
 
     public void Shoot()
     {
-        bulletManager.Shoot(gunTransform.position, lookDirection);
-        Debug.Log("Shoot");
+        bulletManager.Shoot(gunTransform.position, transform.rotation);
     }
 
     public void Move(Vector2 direction)
     {
-        //Debug.Log(direction);
         moveDirection = direction;
-        if (moveDirection != Vector2.zero)
-        {
-            lookDirection = direction;
-        }
         if (moveCoroutine == null)
         {
             StartCoroutine(MoveRoutine());
@@ -47,7 +40,7 @@ public class PlayerMovementSystem : MonoBehaviour
         {
             float angle = Vector3.Angle(new Vector3(0.0f, 1.0f, 0.0f), new Vector3(moveDirection.x, moveDirection.y, 0.0f));
             if (moveDirection.x > 0.0f) { angle = -angle; angle = angle + 360; }
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            selfTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             rigidbody.velocity = moveDirection * speed;
             yield return new WaitForFixedUpdate();
         }
