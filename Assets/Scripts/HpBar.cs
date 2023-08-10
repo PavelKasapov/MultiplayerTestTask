@@ -6,16 +6,18 @@ public class HpBar : MonoBehaviour
 {
     [SerializeField] Slider slider;
     [SerializeField] TextMeshProUGUI text;
-    [SerializeField] HpSystem hpSystem;
 
-    private void Awake()
+    public void SetHpSystem(HpSystem hpSystem)
     {
-        hpSystem.OnValueChanged += SetScrollbarValue;
+        gameObject.SetActive(true);
+        slider.maxValue = HpSystem.maxHitPoints;
+        hpSystem.OnValueChanged = SetScrollbarValue;
     }
 
     private void SetScrollbarValue(int value)
     {
         slider.value = value;
-        text.text = value.ToString();
+        if (text != null)
+            text.text = value.ToString();
     }
 }

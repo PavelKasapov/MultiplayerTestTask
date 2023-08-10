@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class HpSystem : MonoBehaviour
 {
-    [SerializeField] private int hitPoints = 100;
+    public const int maxHitPoints = 100;
+
+    [SerializeField] private int hitPoints = maxHitPoints;
     [SerializeField] private SpriteRenderer spriteRenderer;
+
     private static Color damagedColor = new Color(1, 0.3137255f, 0);
-    public Action<int> OnValueChanged { get; set; }
-  
+
+    private Color prevColor;
+    private Coroutine ColorFeedbackCoroutine;
+    public Action<int> OnValueChanged;
+    public Action OnDeath;
+    public bool isAlive => hitPoints > 0;
+
+    private void Start()
+    {
+        prevColor = spriteRenderer.color;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Bullet")
@@ -18,20 +31,23 @@ public class HpSystem : MonoBehaviour
             if (hitPoints <= 0)
             {
                 gameObject.SetActive(false);
+                OnDeath.Invoke();
             }
             else
             {
-                StartCoroutine(ColorFeedbackRoutine());
+                if (ColorFeedbackCoroutine != null)
+                    StopCoroutine(ColorFeedbackCoroutine);
+
+                ColorFeedbackCoroutine = StartCoroutine(ColorFeedbackRoutine());
             }
-            
         }
     }
 
     private IEnumerator ColorFeedbackRoutine()
     {
-        var prevColor = spriteRenderer.color;
         spriteRenderer.color = damagedColor;
         yield return new WaitForSecondsRealtime(0.15f);
         spriteRenderer.color = prevColor;
+        ColorFeedbackCoroutine = null;
     }
 }

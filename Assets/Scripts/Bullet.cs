@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed = 3f;
 
     private Vector2 moveDirection;
-    public Action OnCollideAction { get; set; }
+    public Action OnCollideAction;
      
     public void Shoot(Vector2 fromPosition, Quaternion rotation)
     {
